@@ -5,7 +5,7 @@
 **Stop Overseerr/Jellyseerr from auto-monitoring everything it requests.**
 
 [![Build and publish](https://github.com/nicolas-gatta/unmonitorr/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/nicolas-gatta/unmonitorr/actions/workflows/docker-publish.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-4fb0a5.svg)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12-4fb0a5.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/container-GHCR-4fb0a5.svg)](https://github.com/nicolas-gatta/unmonitorr/pkgs/container/unmonitorr)
 
@@ -118,7 +118,3 @@ Because this only reacts to the approval event — not a recurring scan — anyt
 
 - Python 3.12 · Flask · gunicorn
 - Single Docker image, built and published via GitHub Actions to GHCR on every push to `main`
-
-## License
-
-[MIT](LICENSE)
