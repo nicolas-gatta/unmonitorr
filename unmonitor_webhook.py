@@ -453,11 +453,11 @@ def settings_page():
     )
 
 
-if __name__ == "__main__":
-    cfg = get_config()
-    missing = [k for k in ("radarr_api_key", "sonarr_api_key") if not cfg.get(k)]
-    if missing:
-        log.warning("Not yet configured: %s - visit /settings to set these up.", ", ".join(missing))
+cfg = get_config()
+missing = [k for k in ("radarr_api_key", "sonarr_api_key") if not cfg.get(k)]
+if missing:
+    log.warning("Not yet configured: %s - visit /settings to set these up.", ", ".join(missing))
 
+if __name__ == "__main__":
     log.info("Starting on %s:%s (settings at /settings)", LISTEN_HOST, LISTEN_PORT)
     app.run(host=LISTEN_HOST, port=LISTEN_PORT)
