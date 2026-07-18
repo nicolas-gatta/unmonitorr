@@ -16,9 +16,3 @@ services:
       # After that, use the /settings page in the browser - it's saved to
       # ./data/config.json and takes effect immediately, no restart needed.
       LOG_LEVEL: "INFO"
-    networks:
-      - arr-network
-
-networks:
-  arr-network:
-    external: true
