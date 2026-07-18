@@ -1,10 +1,6 @@
 services:
   unmonitorr:
-    # Pulls the image built by GitHub Actions (see .github/workflows/docker-publish.yml).
-    # Replace with your actual GitHub username/repo once you've pushed.
     image: ghcr.io/nicolas-gatta/unmonitorr:latest
-    # Alternative if you'd rather build locally instead of pulling from GHCR:
-    # build: .
     container_name: unmonitorr
     restart: unless-stopped
     ports:
@@ -12,7 +8,8 @@ services:
     volumes:
       - ./data:/app/data   # persists settings saved via the /settings web page
     environment:
-      # These only seed the config the very first time it runs.
-      # After that, use the /settings page in the browser - it's saved to
-      # ./data/config.json and takes effect immediately, no restart needed.
-      LOG_LEVEL: "INFO"
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+      - LOG_LEVEL=INFO
+
