@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - unmonitorr{% endblock %}
+{% block content %}
+  <h1>Unmonitor activity</h1>
+  <p class="sub">Counts since this container's data volume was created.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-number">{{ stats.movies_unmonitored }}</div>
+      <div class="stat-label">Movies unmonitored</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ stats.series_unmonitored }}</div>
+      <div class="stat-label">Series unmonitored</div>
+    </div>
+  </div>
+
+  <h2>Recent activity</h2>
+  {% if stats.last_events %}
+  <ul class="event-list">
+    {% for event in stats.last_events %}
+    <li>
+      <span class="event-kind event-kind--{{ event.kind }}">{{ event.kind }}</span>
+      <span class="event-title">{{ event.title }}</span>
+      <span class="event-time">{{ event.at }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="empty">Nothing unmonitored yet - once Overseerr/Jellyseerr sends a request, it'll show up here.</p>
+  {% endif %}
+
+  <a href="{{ url_for('settings.settings_page') }}" class="settings-link">Go to settings &rarr;</a>
+{% endblock %}
