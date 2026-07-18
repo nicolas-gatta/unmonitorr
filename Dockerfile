@@ -14,6 +14,8 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY unmonitor_webhook.py .
+
 # Created with a default UID/GID of 1000; entrypoint.sh remaps this at
 # container startup to match whatever PUID/PGID env vars are passed in,
 # so it works regardless of what the host's data folder is owned by.
