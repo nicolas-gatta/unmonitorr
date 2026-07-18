@@ -5,21 +5,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# gosu lets the entrypoint drop from root to appuser cleanly after fixing
-# up permissions - usermod/groupmod need root, so we can't set USER here.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gosu \
-    && rm -rf /var/lib/apt/lists/*
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY main.py .
 COPY app/ ./app/
 
-# Created with a default UID/GID of 1000; entrypoint.sh remaps this at
-# container startup to match whatever PUID/PGID env vars are passed in,
-# so it works regardless of what the host's data folder is owned by.
+# Fixed UID 1000. This host doesn't allow runtime UID switching inside the
+# container (chown/setuid as "root" fails - likely userns-remap or similar
+# restriction), so the host-side data folder just needs to be chown'd to
+# 1000:1000 once, from the host itself:
+#   chown -R 1000:1000 /opt/unmonitorr/data
 RUN useradd --uid 1000 --create-home --shell /bin/false appuser \
     && mkdir -p /app/data \
     && chown -R appuser:appuser /app
